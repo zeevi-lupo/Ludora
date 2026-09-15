@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="t d">
+<title id="t">Gardenscapes</title><desc id="d">Original Ludora themed artwork for Gardenscapes</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#25b85a"/><stop offset="1" stop-color="#65c8ff"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".2" cy=".1" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="360" rx="34" fill="url(#bg)"/>
+<circle cx="95" cy="60" r="150" fill="url(#glow)"/>
+<path d="M0 263 C140 197, 260 343, 600 222 V360H0Z" fill="rgba(3,12,28,.16)"/>
+<g opacity=".20">
+  <circle cx="73" cy="83" r="31" fill="#fff"/>
+  <circle cx="427" cy="131" r="21" fill="#fff"/>
+</g>
+<g transform="translate(340 95)"><path d="M105 150c-8-56 15-102 70-138-8 60-33 103-70 138Z" fill="#fff" opacity=".9"/><path d="M103 150c-2-54-32-93-87-118 14 56 44 95 87 118Z" fill="#eaffef"/><circle cx="105" cy="148" r="28" fill="#65c8ff"/></g>
+<text x="38" y="72" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,.84)">LUDORA • PUZZLE</text>
+<text x="38" y="126" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900" fill="#fff">Gardenscapes</text>
+<text x="38" y="166" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,.9)">Coins • Boosters</text>
+</svg>

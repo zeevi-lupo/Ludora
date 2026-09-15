@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="t d">
+<title id="t">Brawl Stars</title><desc id="d">Original Ludora themed artwork for Brawl Stars</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ff4e45"/><stop offset="1" stop-color="#ffcd3c"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".2" cy=".1" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="360" rx="34" fill="url(#bg)"/>
+<circle cx="95" cy="60" r="150" fill="url(#glow)"/>
+<path d="M0 268 C140 192, 260 330, 600 217 V360H0Z" fill="rgba(3,12,28,.16)"/>
+<g opacity=".20">
+  <circle cx="278" cy="58" r="36" fill="#fff"/>
+  <circle cx="292" cy="66" r="12" fill="#fff"/>
+</g>
+<g transform="translate(355 82)"><path d="m110 0 28 65 72 7-55 47 17 71-62-37-62 37 17-71L10 72l72-7Z" fill="#fff" opacity=".95"/><circle cx="110" cy="95" r="28" fill="#ff4e45"/></g>
+<text x="38" y="72" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,.84)">LUDORA • ACTION</text>
+<text x="38" y="126" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900" fill="#fff">Brawl Stars</text>
+<text x="38" y="166" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,.9)">Gems • Coins</text>
+</svg>

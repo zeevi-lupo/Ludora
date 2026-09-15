@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="t d">
+<title id="t">Homescapes</title><desc id="d">Original Ludora themed artwork for Homescapes</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ff8c42"/><stop offset="1" stop-color="#61b5ff"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".2" cy=".1" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="360" rx="34" fill="url(#bg)"/>
+<circle cx="95" cy="60" r="150" fill="url(#glow)"/>
+<path d="M0 264 C140 196, 260 344, 600 221 V360H0Z" fill="rgba(3,12,28,.16)"/>
+<g opacity=".20">
+  <circle cx="114" cy="114" r="32" fill="#fff"/>
+  <circle cx="486" cy="148" r="8" fill="#fff"/>
+</g>
+<g transform="translate(335 100)"><path d="M25 80 120 10l95 70v95H25z" fill="#fff" opacity=".95"/><rect x="95" y="110" width="50" height="65" fill="rgba(0,0,0,.16)"/><rect x="52" y="93" width="35" height="35" fill="#61b5ff"/><rect x="153" y="93" width="35" height="35" fill="#61b5ff"/></g>
+<text x="38" y="72" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,.84)">LUDORA • PUZZLE</text>
+<text x="38" y="126" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900" fill="#fff">Homescapes</text>
+<text x="38" y="166" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,.9)">Coins • Boosters</text>
+</svg>

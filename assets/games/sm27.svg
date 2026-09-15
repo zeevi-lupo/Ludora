@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="t d">
+<title id="t">SM27</title><desc id="d">Original Ludora themed artwork for SM27</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#16a3ff"/><stop offset="1" stop-color="#42d392"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".2" cy=".1" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="360" rx="34" fill="url(#bg)"/>
+<circle cx="95" cy="60" r="150" fill="url(#glow)"/>
+<path d="M0 257 C140 203, 260 337, 600 228 V360H0Z" fill="rgba(3,12,28,.16)"/>
+<g opacity=".20">
+  <circle cx="327" cy="77" r="25" fill="#fff"/>
+  <circle cx="503" cy="179" r="15" fill="#fff"/>
+</g>
+<g transform="translate(340 90)"><rect x="20" y="15" width="210" height="155" rx="18" fill="#fff" opacity=".95"/><rect x="48" y="45" width="65" height="14" rx="7" fill="rgba(0,0,0,.18)"/><rect x="48" y="78" width="115" height="14" rx="7" fill="rgba(0,0,0,.12)"/><rect x="48" y="111" width="92" height="14" rx="7" fill="rgba(0,0,0,.12)"/><circle cx="188" cy="83" r="25" fill="#16a3ff"/><path d="M188 68v30M173 83h30" stroke="#fff" stroke-width="7" stroke-linecap="round"/></g>
+<text x="38" y="72" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,.84)">LUDORA • SPORTS</text>
+<text x="38" y="126" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900" fill="#fff">SM27</text>
+<text x="38" y="166" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,.9)">Credits • Boosts</text>
+</svg>

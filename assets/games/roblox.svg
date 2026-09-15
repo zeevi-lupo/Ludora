@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="t d">
+<title id="t">Roblox</title><desc id="d">Original Ludora themed artwork for Roblox</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#111827"/><stop offset="1" stop-color="#00a6ff"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".2" cy=".1" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="360" rx="34" fill="url(#bg)"/>
+<circle cx="95" cy="60" r="150" fill="url(#glow)"/>
+<path d="M0 258 C140 202, 260 338, 600 227 V360H0Z" fill="rgba(3,12,28,.16)"/>
+<g opacity=".20">
+  <circle cx="368" cy="108" r="26" fill="#fff"/>
+  <circle cx="132" cy="196" r="16" fill="#fff"/>
+</g>
+<g transform="translate(350 80)"><g fill="#fff" opacity=".94"><rect x="0" y="85" width="72" height="72" rx="12"/><rect x="82" y="15" width="72" height="72" rx="12"/><rect x="164" y="85" width="72" height="72" rx="12"/></g><g fill="rgba(0,0,0,.18)"><rect x="18" y="103" width="36" height="36" rx="7"/><rect x="100" y="33" width="36" height="36" rx="7"/><rect x="182" y="103" width="36" height="36" rx="7"/></g></g>
+<text x="38" y="72" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,.84)">LUDORA • CREATIVE</text>
+<text x="38" y="126" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="900" fill="#fff">Roblox</text>
+<text x="38" y="166" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,.9)">Robux • Items</text>
+</svg>
