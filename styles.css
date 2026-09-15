@@ -69,3 +69,5 @@ main{min-height:65vh}.shell{max-width:var(--max);margin:0 auto;padding:30px 20px
 .amount{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:8px}
 .amount .resource-icon{grid-row:1/3;margin:0}
 .amount strong,.amount span{grid-column:2}
+.player-id-field{display:block;margin-top:18px}.player-id-field>span{display:block;margin-bottom:8px;color:#dceaf5;font-size:12px;font-weight:850}.player-id-field input{width:100%;border:1px solid var(--line);border-radius:14px;background:#071a31;color:#fff;padding:14px 15px;outline:0}.player-id-field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}.player-id-field input.invalid{border-color:#ff6675;box-shadow:0 0 0 3px rgba(255,102,117,.14)}.player-id-field small{display:block;margin-top:7px;color:#7892a9;font-size:10px;line-height:1.45}
+.game-art{background:linear-gradient(135deg,#102a48,#0b1d34)}.game-art img{object-position:center}.game-hero-art{object-position:center}
