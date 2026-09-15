@@ -76,6 +76,7 @@ function resourceIcon(resource=""){
   return "✦";
 }
 function resourceBadge(resource){return `<span class="resource-icon" aria-hidden="true">${resourceIcon(resource)}</span>`;}
+function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
 function setQuery(obj={}){
   const p=new URLSearchParams();
   const s1=currentS1();
@@ -175,6 +176,16 @@ function gamePage(g){
         <div class="tracking-box">Tracking: <code>s1</code> keeps the member ID and <code>s2=${esc(g.slug)}</code> identifies this game.</div>
       </aside>
     </div>
+    <div class="profile-loader" id="profileLoader" hidden role="status" aria-live="polite">
+      <div class="profile-loader-card">
+        <div class="loader-game-icon">${gameImage(g,`${g.name} icon`)}</div>
+        <div class="loader-ring" aria-hidden="true"><span>${resourceIcon(g.resource)}</span></div>
+        <h3>Checking Player ID</h3>
+        <p id="loaderText">Connecting to ${esc(g.name)}...</p>
+        <div class="loader-progress"><i></i></div>
+        <small>Please wait while Ludora prepares your game options.</small>
+      </div>
+    </div>
   </div>`;
 }
 
@@ -224,7 +235,7 @@ function bind(){
   const initialCat=qp().get("cat")||"All";document.querySelectorAll("[data-cat]").forEach(b=>{if(b.dataset.cat===initialCat){document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");} b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filterLibrary(b.dataset.cat);}}); if(document.getElementById("libraryGrid")&&initialCat!=="All")filterLibrary(initialCat);
   document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.querySelectorAll(".amount").forEach(a=>{a.querySelector("span:last-child").textContent=t.dataset.res;a.querySelector(".resource-icon").textContent=resourceIcon(t.dataset.res);});});
   document.querySelectorAll(".amount").forEach(a=>a.onclick=()=>{document.querySelectorAll(".amount").forEach(x=>x.classList.remove("selected"));a.classList.add("selected");});
-  const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const id=document.getElementById("playerId"),player=id?.value.trim()||"";if(!/^[A-Za-z0-9._#-]{3,32}$/.test(player)){id?.classList.add("invalid");id?.focus();toast("Enter a valid Player ID (3–32 characters)");return;}id.classList.remove("invalid");const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt,player});};
+  const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const id=document.getElementById("playerId"),player=id?.value.trim()||"";if(!/^[A-Za-z0-9._#-]{3,32}$/.test(player)){id?.classList.add("invalid");id?.focus();toast("Enter a valid Player ID (3–32 characters)");return;}id.classList.remove("invalid");const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";const loader=document.getElementById("profileLoader"),copy=document.getElementById("loaderText");loader.hidden=false;document.body.classList.add("loading-profile");cont.disabled=true;setTimeout(()=>{copy.textContent=loadingMessage(g)+"...";},850);setTimeout(()=>{copy.textContent="Options ready";},1750);setTimeout(()=>{document.body.classList.remove("loading-profile");setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt,player});},2400);};
   const locker=document.getElementById("lockerBtn");if(locker)locker.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;if(CONFIG.lockerUrl.includes("YOUR-ADBLUEMEDIA-LOCKER-URL")){toast("Set your AdBlueMedia locker URL in app.js → CONFIG.lockerUrl");return;}const u=new URL(CONFIG.lockerUrl,location.href);if(currentS1())u.searchParams.set("s1",currentS1());u.searchParams.set("s2",g.slug);location.href=u.toString();};
   document.querySelectorAll(".faq-q").forEach(q=>q.onclick=()=>q.closest(".faq-item").classList.toggle("open"));
 }
