@@ -49,11 +49,11 @@ const GAME_IMAGES = {
 };
 
 const GAME_BANNERS = {
-  "monopoly-go":"/assets/banners/monopoly-go.webp?v=2",
-  "travel-town":"/assets/banners/travel-town.webp?v=2",
-  "gossip-harbor":"/assets/banners/gossip-harbor.webp?v=2",
-  "coin-master":"/assets/banners/coin-master.webp?v=2",
-  "match-masters":"/assets/banners/match-masters.webp?v=2"
+  "monopoly-go":"/assets/banners/monopoly-go.jpg?v=3",
+  "travel-town":"/assets/banners/travel-town.png?v=3",
+  "gossip-harbor":"/assets/banners/gossip-harbor.jpeg?v=3",
+  "coin-master":"/assets/banners/coin-master.jpeg?v=3",
+  "match-masters":"/assets/banners/match-masters.jpg?v=3"
 };
 
 const CONFIG = {
