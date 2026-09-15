@@ -1,5 +1,5 @@
 const GAMES = [
-  {slug:"monopoly-go",name:"Monopoly GO!",category:"Board",resource:"Dice",secondary:"Stickers",tagline:"Roll, build and explore a playful board-world experience.",colors:["#ff5b5f","#f7c948"],badge:"Popular",vibe:"Board-city energy with warm red, gold and dice-inspired details."},
+  {slug:"monopoly-go",name:"Monopoly GO!",category:"Board",resource:"Dice",secondary:null,tagline:"Roll, build and explore a playful board-world experience.",colors:["#ff5b5f","#f7c948"],badge:"Popular",vibe:"Board-city energy with warm red, gold and dice-inspired details."},
   {slug:"travel-town",name:"Travel Town",category:"Merge",resource:"Energy",secondary:"Coins",tagline:"Merge items, travel through colorful locations, and keep your journey moving.",colors:["#16a9ff","#7ce6c6"],badge:"Trending",vibe:"Bright coastal travel tones, breezy blues and relaxed adventure styling."},
   {slug:"gossip-harbor",name:"Gossip Harbor",category:"Merge",resource:"Energy",secondary:"Coins",tagline:"A cozy harbor mystery with merging, stories, and seaside charm.",colors:["#ff4f9a","#ffb17a"],badge:"Hot",vibe:"Warm harbor sunset colors with soft story-driven details."},
   {slug:"coin-master",name:"Coin Master",category:"Casual",resource:"Spins",secondary:"Coins",tagline:"Spin, build, and raid through a colorful village adventure.",colors:["#8b5cf6","#ffc857"],badge:"Popular",vibe:"Deep violet, gold highlights and a playful treasure-inspired mood."},
@@ -23,6 +23,31 @@ const GAMES = [
   {slug:"last-war-survival",name:"Last War: Survival",category:"Strategy",resource:"Diamonds",secondary:"Speedups",tagline:"Base progression, squads, and survival strategy.",colors:["#f04f3d","#ffc046"],badge:"Strategy",vibe:"High-contrast survival red and hazard gold with bunker-like details."}
 ];
 
+const GAME_IMAGES = {
+  "monopoly-go":"https://play-lh.googleusercontent.com/AUGFPG5XqzHukTUDH2mcdOTpEwlDmZ5hUuWPXwu9IcvcyaBTwhV2WJeKKFAj_UA2m05ZxPgJuhrllXIqlW0i=s512",
+  "travel-town":"https://play-lh.googleusercontent.com/_YoJBEqLA6qZ0xiulFJWKfubaZmxzyphcW4BwMIXFapkO3ifyuVsnMaLkWQClMPuUnahVtIAtyU_baUHLOdP2A=s512",
+  "gossip-harbor":"https://play-lh.googleusercontent.com/HLRg8oInVYJV8Uebxlh1dTH4j7OTBMIWOPZY7A7ryW9UB8K4i7HCOqkGfSLORsK-XzqhnJcJM0mjObVKZYL8zA=s512",
+  "coin-master":"https://play-lh.googleusercontent.com/b5QL7lke38opLtJxvaDw1EEyJuaRjzEEL4j4zt5MtYSWz6t6o9DrG6LkH6rA_lNFHBe4cnXEZR0D_q_IW_-rcQ=s512",
+  "match-masters":"https://play-lh.googleusercontent.com/lTNpwPOAFpCsEepGiCHbYUcXNtzUvN68SqbcGKgUBFKUx1aMenxQMr1QNtXIVzepSARzZgG-w6qvXY09njTDuA=s512",
+  "tasty-travel":"https://cdn.aptoide.com/imgs/c/c/e/cceb82ff117cb1a5b3a62111cb577d50_icon.jpg",
+  "ea-fc-mobile":"https://play-lh.googleusercontent.com/NEp-Nq3k_EBZriaPEmAKdqjd2v3UGAhMcSvoOcdrfwZQavolX_-OwQA2TX21LS-A8x8cV15r3J2CFaG-yT2IVX4=s512",
+  "sm27":"https://play-lh.googleusercontent.com/nx5zgQM8jG6JZwhHVFbyFFl9zt52uk7Y_QGaEUImaQILY5XUEaIsvb2s1cpt799ZlTcUsWZIscjynhCSZ9lZvIk=s512",
+  "roblox":"https://play-lh.googleusercontent.com/QqZj22aXblAyYDxLQw-Gg0ycW0QkKhrDnwqgERZU9BMRXZnMlgXfq-94sikG5mEpt_I0lzZxcUzfLblmQgwYzUE=s512",
+  "pokemon-go":"https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/49/7e/0f/497e0f5d-28be-1c52-9c88-77d77a5b0ded/Placeholder.mill/1024x1024wd.png",
+  "royal-match":"https://play-lh.googleusercontent.com/RBnqZ3q_jjOREX6v49DGe4BzKGNwJMcv8aBNDeDuMRFQdyX6rA7S-k5N39ggj43XeKFGLmxuH1jOYONfbUHmYA=s512",
+  "township":"https://play-lh.googleusercontent.com/R57nBnvKx2fcs-Ct1wKW2j85S4f8h2dPsn2L9jO4G0pxZIHRozdwPRZ_tAvT6Kh-P8I7A6CDJFu8cYuvBzccvIU=s512",
+  "family-island":"https://dl.memuplay.com/new_market/img/com.MelsoftGames.FamilyIslandFarm.icon.2024-11-23-02-04-00.png",
+  "gardenscapes":"https://play-lh.googleusercontent.com/DyprR0O5Osx9CUYp0rG59kj3cGi69rZ5LJXbrp8gKkxKOoGehVzK_YRi6ODYG6-hV9EEZiWVAtubqbvqMvPr=s512",
+  "homescapes":"https://play-lh.googleusercontent.com/ft9OqNwpLaL45Jq3YuSYt0wm3y_j-YteTQqfq4Cu2PRWTrkFMuhlmUHmxggNxOP96gxR9Q3ML1Yt87iV3zD5fg=s512",
+  "whiteout-survival":"https://cdn.wegame.tech/default-game-webp/whiteout-survival.webp",
+  "rise-of-kingdoms":"https://play-lh.googleusercontent.com/HD0DeTH3uY8-4xKW54eH4yViYQtdLMtGKv_EYdAnH75a2-SdRLKZVZOJgxS1BfAug4eqVsVgDs3eoL3YfMU9lg=s512",
+  "dice-dreams":"https://www.guvenlioyna.org.tr/uploads/reviewImage/Dice%20Dreams%20.jpg",
+  "brawl-stars":"https://play-lh.googleusercontent.com/wEOIM7cYyXkMExNztvFYKHJLPegXp6h81-P_JQQ_9KQvDCWK49m2zpt1mTRXO5bA2qU_Bp4em_nfMsHXmq8Z=s512",
+  "clash-of-clans":"https://static.wikia.nocookie.net/logopedia/images/c/cc/Clash_of_Clans_%28App_Icon%29.png/revision/latest?cb=20220625115343",
+  "candy-crush-saga":"https://play-lh.googleusercontent.com/JvMhIxuwArVmcMReJQB8PIEB1MIQNMGf9j5i914JtkBrHrA55K-nMUIVlYCa7SXAdHtzLtsycEo6NpXeHFxLwvI=s512",
+  "last-war-survival":"https://img.skich.io/games/icons/7d5fe480-a047-443b-936c-0899bf053e1a.jpg"
+};
+
 const CONFIG = {
   lockerUrl: "https://YOUR-ADBLUEMEDIA-LOCKER-URL.example/offer",
   siteName: "Ludora",
@@ -34,7 +59,23 @@ const qp = () => new URLSearchParams(location.search);
 const currentS1 = () => qp().get("s1") || CONFIG.defaultMember || "";
 
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[m]);}
-function asset(slug){return `assets/games/${slug}.svg`;}
+function fallbackAsset(slug){return `assets/games/${slug}.svg`;}
+function asset(slug){return GAME_IMAGES[slug]||fallbackAsset(slug);}
+function gameImage(g,alt="",className=""){return `<img${className?` class="${className}"`:""} src="${asset(g.slug)}" alt="${esc(alt)}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAsset(g.slug)}'">`;}
+function resourceIcon(resource=""){
+  const r=resource.toLowerCase();
+  if(r.includes("energy"))return "⚡";
+  if(r.includes("dice")||r.includes("roll"))return "🎲";
+  if(r.includes("coin")||r.includes("gold")||r.includes("cash")||r.includes("credit"))return "🪙";
+  if(r.includes("gem")||r.includes("diamond")||r.includes("rub"))return "💎";
+  if(r.includes("boost")||r.includes("speed"))return "🚀";
+  if(r.includes("spin"))return "🔄";
+  if(r.includes("point"))return "⚽";
+  if(r.includes("robux"))return "⬡";
+  if(r.includes("item"))return "🎒";
+  return "✦";
+}
+function resourceBadge(resource){return `<span class="resource-icon" aria-hidden="true">${resourceIcon(resource)}</span>`;}
 function setQuery(obj={}){
   const p=new URLSearchParams();
   const s1=currentS1();
@@ -50,7 +91,7 @@ function toast(msg){const el=document.getElementById("toast");el.textContent=msg
 
 function gameCard(g,index=0){
   return `<article class="game-card" data-game="${esc(g.slug)}" tabindex="0" role="button" aria-label="Open ${esc(g.name)}">
-    <div class="game-art"><span class="game-rank">${esc(g.badge)}</span><img src="${asset(g.slug)}" alt="${esc(g.name)} themed artwork" loading="lazy"></div>
+    <div class="game-art"><span class="game-rank">${esc(g.badge)}</span>${gameImage(g,`${g.name} official game icon`)}</div>
     <div class="game-body"><div class="game-title-row"><h3>${esc(g.name)}</h3><span class="game-arrow">→</span></div>
       <div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span></div>
       <p>${esc(g.tagline)}</p></div>
@@ -119,11 +160,12 @@ function amountsFor(g){
 function gamePage(g){
   const [c1,c2]=g.colors;const amounts=amountsFor(g);
   return `<div class="shell game-page" data-theme="${esc(g.slug)}" style="--accent:${c1};--accent2:${c2}">
-    <section class="game-hero"><img class="game-hero-art" src="${asset(g.slug)}" alt="${esc(g.name)} themed artwork"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><h1>${esc(g.name)}</h1><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span><span class="pill">${esc(g.secondary)}</span></div></div></section>
+    <section class="game-hero">${gameImage(g,`${g.name} official game icon`,"game-hero-art")}<div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><h1>${esc(g.name)}</h1><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
     <div class="game-layout">
       <section class="option-card"><div class="step-row"><span class="step active"></span><span class="step"></span><span class="step"></span></div><h2>Choose your option</h2><p class="option-copy">Select a content option to personalize the next step. Ludora does not directly add in-game currency or items to third-party accounts.</p>
-        <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${esc(g.resource)}</button><button class="tab" data-res="${esc(g.secondary)}">${esc(g.secondary)}</button></div>
-        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}"><strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
+        <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary)}${esc(g.secondary)}</button>`:""}</div>
+        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}">${resourceBadge(g.resource)}<strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
+        <label class="player-id-field" for="playerId"><span>Player ID / User ID</span><input id="playerId" type="text" inputmode="text" maxlength="32" autocomplete="off" placeholder="Enter your game ID" aria-describedby="playerIdHelp"><small id="playerIdHelp">Use your public in-game ID only. Never enter your password.</small></label>
         <button class="cta-full" id="continueBtn">Continue →</button>
         <div class="notice">Selections on this page are used to personalize the experience. Partner offers have their own requirements, eligibility and availability.</div>
       </section>
@@ -137,9 +179,9 @@ function gamePage(g){
 }
 
 function verifyPage(g){
-  const p=qp(),resource=p.get("resource")||g.resource,amount=p.get("amount")||"";
+  const p=qp(),resource=p.get("resource")||g.resource,amount=p.get("amount")||"",player=p.get("player")||"";
   return `<div class="shell"><div class="verify-wrap"><div class="verify-card"><div class="lock-badge">↗</div><span class="eyebrow">PARTNER OFFER STEP</span><h1>Continue to available offers</h1><p>You selected a ${esc(g.name)} content path. Continue to see the partner offers currently available for your region and device.</p>
-    <div class="summary-box"><div class="summary-row"><span>Game</span><span>${esc(g.name)}</span></div><div class="summary-row"><span>Selection</span><span>${esc(resource)}${amount?` · ${esc(amount)}`:""}</span></div>${currentS1()?`<div class="summary-row"><span>Member ID</span><span>${esc(currentS1())}</span></div>`:""}</div>
+    <div class="summary-box"><div class="summary-row"><span>Game</span><span>${esc(g.name)}</span></div><div class="summary-row"><span>Player ID</span><span>${esc(player)}</span></div><div class="summary-row"><span>Selection</span><span>${resourceIcon(resource)} ${esc(resource)}${amount?` · ${esc(amount)}`:""}</span></div>${currentS1()?`<div class="summary-row"><span>Member ID</span><span>${esc(currentS1())}</span></div>`:""}</div>
     <button class="primary" style="width:100%" id="lockerBtn">Continue to partner offers →</button><button class="back-btn" style="margin-top:12px" data-game="${esc(g.slug)}">← Change selection</button>
     <p class="micro">Partner offers are operated by third parties. Review each offer's requirements before participating.</p></div></div></div>`;
 }
@@ -180,9 +222,9 @@ function bind(){
   if(hsb)hsb.onclick=()=>openSearch(hs?.value||""); if(hso)hso.onclick=()=>openSearch(); if(hs)hs.onkeydown=e=>{if(e.key==="Enter")openSearch(hs.value)};
   const librarySearch=document.getElementById("librarySearch");if(librarySearch)librarySearch.oninput=()=>filterLibrary();
   const initialCat=qp().get("cat")||"All";document.querySelectorAll("[data-cat]").forEach(b=>{if(b.dataset.cat===initialCat){document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");} b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filterLibrary(b.dataset.cat);}}); if(document.getElementById("libraryGrid")&&initialCat!=="All")filterLibrary(initialCat);
-  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.querySelectorAll(".amount span").forEach(s=>s.textContent=t.dataset.res);});
+  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.querySelectorAll(".amount").forEach(a=>{a.querySelector("span:last-child").textContent=t.dataset.res;a.querySelector(".resource-icon").textContent=resourceIcon(t.dataset.res);});});
   document.querySelectorAll(".amount").forEach(a=>a.onclick=()=>{document.querySelectorAll(".amount").forEach(x=>x.classList.remove("selected"));a.classList.add("selected");});
-  const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt});};
+  const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const id=document.getElementById("playerId"),player=id?.value.trim()||"";if(!/^[A-Za-z0-9._#-]{3,32}$/.test(player)){id?.classList.add("invalid");id?.focus();toast("Enter a valid Player ID (3–32 characters)");return;}id.classList.remove("invalid");const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt,player});};
   const locker=document.getElementById("lockerBtn");if(locker)locker.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;if(CONFIG.lockerUrl.includes("YOUR-ADBLUEMEDIA-LOCKER-URL")){toast("Set your AdBlueMedia locker URL in app.js → CONFIG.lockerUrl");return;}const u=new URL(CONFIG.lockerUrl,location.href);if(currentS1())u.searchParams.set("s1",currentS1());u.searchParams.set("s2",g.slug);location.href=u.toString();};
   document.querySelectorAll(".faq-q").forEach(q=>q.onclick=()=>q.closest(".faq-item").classList.toggle("open"));
 }
