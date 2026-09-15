@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#07152d" />
+  <meta name="description" content="Ludora — discover gaming content, guides and partner offers across popular mobile games." />
+  <title>Ludora — Play. Explore. Unlock.</title>
+  <link rel="icon" href="assets/logo.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="site-header">
+    <a class="brand" href="#" data-route="home" aria-label="Ludora home"><img src="assets/logo.svg" alt="Ludora" /></a>
+    <nav class="desktop-nav" aria-label="Primary">
+      <button data-route="home">Home</button>
+      <button data-route="games">Games</button>
+      <button data-route="faq">FAQ</button>
+      <button data-route="about">About</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchButton" aria-label="Search games">⌕</button>
+      <button class="primary small" data-route="games">Explore Games</button>
+      <button class="icon-btn mobile-only" id="menuButton" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <nav class="mobile-bottom" aria-label="Mobile navigation">
+    <button data-route="home"><span>⌂</span>Home</button>
+    <button data-route="games"><span>◈</span>Games</button>
+    <button data-route="faq"><span>?</span>FAQ</button>
+    <button id="moreButton"><span>⋯</span>More</button>
+  </nav>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+    <div class="drawer-head"><img src="assets/logo.svg" alt="Ludora" /><button class="icon-btn" id="closeDrawer">×</button></div>
+    <button data-route="home">Home</button><button data-route="games">Games</button>
+    <button data-route="faq">FAQ</button><button data-route="about">About</button>
+    <button data-route="terms">Terms of Service</button><button data-route="privacy">Privacy Policy</button>
+    <a href="mailto:hello@example.com">Contact</a>
+    <div class="drawer-card"><strong>Play. Explore. Unlock.</strong><p>One clean hub for gaming content and partner opportunities.</p></div>
+  </aside>
+
+  <div class="modal-backdrop" id="searchModal" hidden>
+    <section class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+      <div class="search-head"><h2 id="searchTitle">Find a game</h2><button class="icon-btn" id="closeSearch">×</button></div>
+      <input id="globalSearch" type="search" placeholder="Search by game name or category..." autocomplete="off" />
+      <div id="searchResults" class="search-results"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div><img src="assets/logo.svg" class="footer-logo" alt="Ludora" /><p>Play. Explore. Unlock.<br/>A clean multi-game discovery hub.</p></div>
+      <div><h4>Quick Links</h4><button data-route="home">Home</button><button data-route="games">Games</button><button data-route="faq">FAQ</button><button data-route="about">About</button></div>
+      <div><h4>Legal</h4><button data-route="terms">Terms</button><button data-route="privacy">Privacy</button><a href="mailto:hello@example.com">Contact</a></div>
+      <div><h4>Important</h4><p>Ludora is an independent discovery portal and is not affiliated with the publishers of the games shown. Availability and eligibility for partner offers vary by region and offer terms.</p></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="year"></span> Ludora.</span><span>Play. Explore. Unlock.</span></div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
