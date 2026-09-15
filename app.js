@@ -48,6 +48,14 @@ const GAME_IMAGES = {
   "last-war-survival":"https://img.skich.io/games/icons/7d5fe480-a047-443b-936c-0899bf053e1a.jpg"
 };
 
+const GAME_BANNERS = {
+  "monopoly-go":"assets/banners/monopoly-go.webp",
+  "travel-town":"assets/banners/travel-town.webp",
+  "gossip-harbor":"assets/banners/gossip-harbor.webp",
+  "coin-master":"assets/banners/coin-master.webp",
+  "match-masters":"assets/banners/match-masters.webp"
+};
+
 const CONFIG = {
   lockerUrl: "https://YOUR-ADBLUEMEDIA-LOCKER-URL.example/offer",
   siteName: "Ludora",
@@ -61,7 +69,7 @@ const currentS1 = () => qp().get("s1") || CONFIG.defaultMember || "";
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[m]);}
 function fallbackAsset(slug){return `assets/games/${slug}.svg`;}
 function asset(slug){return GAME_IMAGES[slug]||fallbackAsset(slug);}
-function bannerAsset(slug){return fallbackAsset(slug);}
+function bannerAsset(slug){return GAME_BANNERS[slug]||fallbackAsset(slug);}
 function gameImage(g,alt="",className=""){return `<img${className?` class="${className}"`:""} src="${asset(g.slug)}" alt="${esc(alt)}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAsset(g.slug)}'">`;}
 function resourceIcon(resource=""){
   const r=resource.toLowerCase();
