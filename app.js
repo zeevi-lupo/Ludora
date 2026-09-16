@@ -53,7 +53,24 @@ const GAME_BANNERS = {
   "travel-town":"./assets/banners/travel-town.png?v=20260916b",
   "gossip-harbor":"./assets/banners/gossip-harbor.jpeg?v=20260916b",
   "coin-master":"./assets/banners/coin-master.jpeg?v=20260916b",
-  "match-masters":"./assets/banners/match-masters.jpg?v=20260916b"
+  "match-masters":"./assets/banners/match-masters.jpg?v=20260916b",
+  "tasty-travel":"https://pg.io/pg-io/store-games/edad1222-ab26-4548-918c-b0a0c481adea/header.jpg",
+  "ea-fc-mobile":"https://s25.q4cdn.com/103200307/files/doc_multimedia/KeyArtMobile.jpg",
+  "sm27":"https://play-lh.googleusercontent.com/0nryEWneUZOHJfrV5Zbfi7XLt6ie9XBKNTzCsOyXr5E-vr_bidU14YAy3KCyAkXPwVM4EIDgkLF0p3fwwS1H-w=w1024-h576",
+  "roblox":"https://store-images.s-microsoft.com/image/apps.47252.13510798883386282.a1e5df65-8dd7-427c-9da9-506afa37b254.f4132380-deee-4518-8bbd-2a9b540046f3",
+  "pokemon-go":"https://wallpapercave.com/wp/wp9457676.jpg",
+  "royal-match":"https://images.ctfassets.net/vfkpgemp7ek3/3xsU0ImxodgKTK1udEujcU/ff8489a7faec2249ab461c4f0d847b10/Hero.jpg",
+  "township":"https://assets.gam3s.gg/Township_Meta_Image_03eed0231f.jpg",
+  "family-island":"https://defold.com/images/games/familyisland-full.png",
+  "gardenscapes":"https://res09.bignox.com/appcenter/th/2020/05/Gardenscapes.jpg",
+  "homescapes":"https://play-lh.googleusercontent.com/Rx0zztLbUCpnCYqzWdipu7bDLChGjaHtdntE4pfot9tfXQNrys08WCfePhdnYpbRc-TaCODK3F7YVLHB71dcCw=w1024-h576",
+  "whiteout-survival":"https://i0.wp.com/loxtech-gaming.co.uk/wp-content/uploads/2025/03/whiteout-survival-1715897481610.jpg?fit=2208%2C1242&ssl=1",
+  "rise-of-kingdoms":"https://dl.memuplay.com/new_market/img/com.lilithgame.roc.gp.sc0.2021-03-01-20-20-14.jpg",
+  "dice-dreams":"https://app.gamedia.jp/lib/i/eyecatch/4847_2.png",
+  "brawl-stars":"https://cdn6.aptoide.com/imgs/d/d/4/dd42dfd0456ec0312e7b54232afdd36b_fgraphic.jpg",
+  "clash-of-clans":"https://d2u0ktu8omkpf6.cloudfront.net/b80c240db665c9125a09fe9cd8f20f9d1832a940e66b8c59.jpg",
+  "candy-crush-saga":"https://store-images.s-microsoft.com/image/apps.52397.13510798882606697.1816f804-e7fd-4295-9275-23dec3563baf.2ef7ec2d-2e37-489e-b6ac-b5f5e44d429c?h=1280",
+  "last-war-survival":"https://images.ctfassets.net/vfkpgemp7ek3/1hcC59AL0kW7LQqD0GZTcg/e09901b465e9df2434395c5f55afdc88/Cover_Image.jpg"
 };
 
 const CONFIG = {
@@ -174,7 +191,7 @@ function amountsFor(g){
 function gamePage(g){
   const [c1,c2]=g.colors;const amounts=amountsFor(g);
   return `<div class="shell game-page" data-theme="${esc(g.slug)}" style="--accent:${c1};--accent2:${c2}">
-    <section class="game-hero"><img class="game-banner-image" src="${bannerAsset(g.slug)}" alt="${esc(g.name)} game banner" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='${asset(g.slug)}';this.classList.add('is-fallback')"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><div class="game-identity">${gameImage(g,`${g.name} official logo`,"game-page-logo")}<div><span class="mini-label">GAME EXPERIENCE</span><h1>${esc(g.name)}</h1></div></div><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
+    <section class="game-hero"><img class="game-banner-image" src="${bannerAsset(g.slug)}" alt="${esc(g.name)} game banner" loading="eager" decoding="async" fetchpriority="high" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${asset(g.slug)}';this.classList.add('is-fallback')"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><div class="game-identity">${gameImage(g,`${g.name} official logo`,"game-page-logo")}<div><span class="mini-label">GAME EXPERIENCE</span><h1>${esc(g.name)}</h1></div></div><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
     <div class="game-layout">
       <section class="option-card"><div class="step-row"><span class="step active"></span><span class="step"></span><span class="step"></span></div><h2>Choose your option</h2><p class="option-copy">Select a content option to personalize the next step. Ludora does not directly add in-game currency or items to third-party accounts.</p>
         <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary)}${esc(g.secondary)}</button>`:""}</div>
