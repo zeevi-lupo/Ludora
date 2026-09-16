@@ -29,7 +29,7 @@ const GAME_IMAGES = {
   "gossip-harbor":"https://play-lh.googleusercontent.com/HLRg8oInVYJV8Uebxlh1dTH4j7OTBMIWOPZY7A7ryW9UB8K4i7HCOqkGfSLORsK-XzqhnJcJM0mjObVKZYL8zA=s512",
   "coin-master":"https://play-lh.googleusercontent.com/b5QL7lke38opLtJxvaDw1EEyJuaRjzEEL4j4zt5MtYSWz6t6o9DrG6LkH6rA_lNFHBe4cnXEZR0D_q_IW_-rcQ=s512",
   "match-masters":"https://play-lh.googleusercontent.com/lTNpwPOAFpCsEepGiCHbYUcXNtzUvN68SqbcGKgUBFKUx1aMenxQMr1QNtXIVzepSARzZgG-w6qvXY09njTDuA=s512",
-  "tasty-travel":"https://cdn.aptoide.com/imgs/c/c/e/cceb82ff117cb1a5b3a62111cb577d50_icon.jpg",
+  "tasty-travel":"https://www.centurygames.com/wp-content/uploads/2025/04/gamelogo-e1744616654786.png",
   "ea-fc-mobile":"https://play-lh.googleusercontent.com/NEp-Nq3k_EBZriaPEmAKdqjd2v3UGAhMcSvoOcdrfwZQavolX_-OwQA2TX21LS-A8x8cV15r3J2CFaG-yT2IVX4=s512",
   "sm27":"https://play-lh.googleusercontent.com/nx5zgQM8jG6JZwhHVFbyFFl9zt52uk7Y_QGaEUImaQILY5XUEaIsvb2s1cpt799ZlTcUsWZIscjynhCSZ9lZvIk=s512",
   "roblox":"https://play-lh.googleusercontent.com/QqZj22aXblAyYDxLQw-Gg0ycW0QkKhrDnwqgERZU9BMRXZnMlgXfq-94sikG5mEpt_I0lzZxcUzfLblmQgwYzUE=s512",
@@ -88,20 +88,34 @@ function fallbackAsset(slug){return `assets/games/${slug}.svg`;}
 function asset(slug){return GAME_IMAGES[slug]||fallbackAsset(slug);}
 function bannerAsset(slug){return GAME_BANNERS[slug]||fallbackAsset(slug);}
 function gameImage(g,alt="",className=""){return `<img${className?` class="${className}"`:""} src="${asset(g.slug)}" alt="${esc(alt)}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackAsset(g.slug)}'">`;}
-function resourceIcon(resource=""){
+function resourceKind(resource=""){
   const r=resource.toLowerCase();
-  if(r.includes("energy"))return "⚡";
-  if(r.includes("dice")||r.includes("roll"))return "🎲";
-  if(r.includes("coin")||r.includes("gold")||r.includes("cash")||r.includes("credit"))return "🪙";
-  if(r.includes("gem")||r.includes("diamond")||r.includes("rub"))return "💎";
-  if(r.includes("boost")||r.includes("speed"))return "🚀";
-  if(r.includes("spin"))return "🔄";
-  if(r.includes("point"))return "⚽";
-  if(r.includes("robux"))return "⬡";
-  if(r.includes("item"))return "🎒";
-  return "✦";
+  if(r.includes("energy"))return "energy";
+  if(r.includes("dice")||r.includes("roll"))return "dice";
+  if(r.includes("spin"))return "spin";
+  if(r.includes("robux"))return "robux";
+  if(r.includes("pokécoin"))return "pokecoin";
+  if(r.includes("gold bar"))return "goldbar";
+  if(r.includes("cash")||r.includes("money"))return "cash";
+  if(r.includes("gem")||r.includes("diamond"))return "gem";
+  return "coin";
 }
-function resourceBadge(resource){const robux=resource.toLowerCase().includes("robux");return `<span class="resource-icon${robux?" resource-robux":""}" aria-hidden="true">${robux?"<i></i>":resourceIcon(resource)}</span>`;}
+function resourceSvg(resource=""){
+  const kind=resourceKind(resource);
+  const icons={
+    energy:`<svg viewBox="0 0 32 32"><path d="M18.5 2 7 18h8l-1.5 12L25 13h-8z"/></svg>`,
+    dice:`<svg viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="6"/><g class="cut"><circle cx="10" cy="10" r="2"/><circle cx="22" cy="10" r="2"/><circle cx="16" cy="16" r="2"/><circle cx="10" cy="22" r="2"/><circle cx="22" cy="22" r="2"/></g></svg>`,
+    spin:`<svg viewBox="0 0 32 32"><path d="M26 8V3l-3 3a12 12 0 1 0 3.7 13h-5a7 7 0 1 1-2.2-9.5L16 13h10V8z"/></svg>`,
+    coin:`<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13"/><circle class="line" cx="16" cy="16" r="9"/><path class="cut" d="m16 9 2 4 5 .7-3.5 3.4.8 4.9-4.3-2.3-4.3 2.3.8-4.9L9 13.7l5-.7z"/></svg>`,
+    gem:`<svg viewBox="0 0 32 32"><path d="m6 11 5-7h10l5 7-10 17z"/><path class="line" d="m6 11 10 17 10-17M11 4l5 24 5-24M6 11h20"/></svg>`,
+    cash:`<svg viewBox="0 0 32 32"><path d="M4 8h24v17H4z"/><path class="cut" d="M8 11h16a3 3 0 0 0 2 2v7a3 3 0 0 0-2 2H8a3 3 0 0 0-2-2v-7a3 3 0 0 0 2-2zm8 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>`,
+    robux:`<svg viewBox="0 0 32 32"><path d="m8 3 21 6-6 20-20-6z"/><path class="cut" d="m13 11 8 2-2 8-8-2z"/></svg>`,
+    pokecoin:`<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13"/><path class="line" d="M4 16h24"/><circle class="cut" cx="16" cy="16" r="5"/><circle cx="16" cy="16" r="2"/></svg>`,
+    goldbar:`<svg viewBox="0 0 32 32"><path d="m8 5 13 2 4 8-15-2zM5 16l15 2 4 8-16-2z"/><path class="line" d="m10 13-2-8m12 13 5-3M8 24l-3-8"/></svg>`
+  };
+  return icons[kind]||icons.coin;
+}
+function resourceBadge(resource,slug=""){return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}" aria-hidden="true">${resourceSvg(resource)}</span>`;}
 function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
 function gameExperience(category){
   const copy={Board:"Board-building and dice-based progression",Merge:"Merge items to progress through stories and locations",Casual:"Quick sessions with collection and progression",Puzzle:"Puzzle levels with strategic progression",Sports:"Team building and competitive sports gameplay",Creative:"Explore community-created worlds and experiences",Adventure:"Exploration, collection and character progression",Simulation:"Build, manage and expand your own world",Strategy:"Build, upgrade and compete through strategic decisions",Action:"Fast multiplayer action and competitive modes"};
@@ -194,22 +208,22 @@ function gamePage(g){
     <section class="game-hero"><img class="game-banner-image" src="${bannerAsset(g.slug)}" alt="${esc(g.name)} game banner" loading="eager" decoding="async" fetchpriority="high" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${asset(g.slug)}';this.classList.add('is-fallback')"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><div class="game-identity">${gameImage(g,`${g.name} official logo`,"game-page-logo")}<div><span class="mini-label">GAME EXPERIENCE</span><h1>${esc(g.name)}</h1></div></div><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
     <div class="game-layout">
       <section class="option-card"><div class="step-row"><span class="step active"></span><span class="step"></span><span class="step"></span></div><h2>Choose your option</h2><p class="option-copy">Select a content option to personalize the next step. Ludora does not directly add in-game currency or items to third-party accounts.</p>
-        <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary)}${esc(g.secondary)}</button>`:""}</div>
-        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}">${resourceBadge(g.resource)}<strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
+        <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource,g.slug)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary,g.slug)}${esc(g.secondary)}</button>`:""}</div>
+        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}">${resourceBadge(g.resource,g.slug)}<strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
         <label class="player-id-field" for="playerId"><span>Player ID / User ID</span><input id="playerId" type="text" inputmode="text" maxlength="32" autocomplete="off" placeholder="Enter your game ID" aria-describedby="playerIdHelp"><small id="playerIdHelp">Use your public in-game ID only. Never enter your password.</small></label>
         <button class="cta-full" id="continueBtn">Continue →</button>
         <div class="notice">Selections on this page are used to personalize the experience. Partner offers have their own requirements, eligibility and availability.</div>
       </section>
       <aside class="info-card"><div class="info-top"><div class="game-mini-icon"><img src="${asset(g.slug)}" alt=""></div><div><span class="mini-label">ABOUT THE GAME</span><h3>${esc(g.name)}</h3></div></div>
         <div class="theme-note"><strong>About ${esc(g.name)}</strong><span>${esc(g.tagline)}</span></div>
-        <div class="game-facts"><div><span>Genre</span><strong>${esc(g.category)}</strong></div><div><span>Main resource</span><strong>${resourceIcon(g.resource)} ${esc(g.resource)}</strong></div><div><span>Game experience</span><strong>${esc(gameExperience(g.category))}</strong></div></div>
+        <div class="game-facts"><div><span>Genre</span><strong>${esc(g.category)}</strong></div><div><span>Main resource</span><strong class="resource-fact">${resourceBadge(g.resource,g.slug)} ${esc(g.resource)}</strong></div><div><span>Game experience</span><strong>${esc(gameExperience(g.category))}</strong></div></div>
         <div class="game-about-note">Game names, logos and artwork belong to their respective owners. Ludora is an independent discovery experience.</div>
       </aside>
     </div>
     <div class="profile-loader" id="profileLoader" hidden role="status" aria-live="polite">
       <div class="profile-loader-card">
         <div class="loader-game-icon">${gameImage(g,`${g.name} icon`)}</div>
-        <div class="loader-ring" aria-hidden="true"><span>${resourceIcon(g.resource)}</span></div>
+        <div class="loader-ring" aria-hidden="true"><span>${resourceBadge(g.resource,g.slug)}</span></div>
         <h3>Checking Player ID</h3>
         <p id="loaderText">Connecting to ${esc(g.name)}...</p>
         <div class="loader-progress"><i></i></div>
@@ -222,7 +236,7 @@ function gamePage(g){
 function verifyPage(g){
   const p=qp(),resource=p.get("resource")||g.resource,amount=p.get("amount")||"",player=p.get("player")||"";
   return `<div class="shell"><div class="verify-wrap"><div class="verify-card"><div class="lock-badge">${gameImage(g,`${g.name} official logo`,"offer-game-logo")}</div><span class="eyebrow">PARTNER OFFER STEP</span><h1>Continue to available offers</h1><p>You selected a ${esc(g.name)} content path. Continue to see the partner offers currently available for your region and device.</p>
-    <div class="summary-box"><div class="summary-row"><span>Game</span><span>${esc(g.name)}</span></div><div class="summary-row"><span>Player ID</span><span>${esc(player)}</span></div><div class="summary-row"><span>Selection</span><span>${resourceIcon(resource)} ${esc(resource)}${amount?` · ${esc(amount)}`:""}</span></div>${currentS1()?`<div class="summary-row"><span>Member ID</span><span>${esc(currentS1())}</span></div>`:""}</div>
+    <div class="summary-box"><div class="summary-row"><span>Game</span><span>${esc(g.name)}</span></div><div class="summary-row"><span>Player ID</span><span>${esc(player)}</span></div><div class="summary-row"><span>Selection</span><span class="resource-summary">${resourceBadge(resource,g.slug)} ${esc(resource)}${amount?` · ${esc(amount)}`:""}</span></div>${currentS1()?`<div class="summary-row"><span>Member ID</span><span>${esc(currentS1())}</span></div>`:""}</div>
     <button class="primary" style="width:100%" id="lockerBtn">Continue to partner offers →</button><button class="back-btn" style="margin-top:12px" data-game="${esc(g.slug)}">← Change selection</button>
     <p class="micro">Partner offers are operated by third parties. Review each offer's requirements before participating.</p></div></div></div>`;
 }
@@ -263,7 +277,7 @@ function bind(){
   if(hsb)hsb.onclick=()=>openSearch(hs?.value||""); if(hso)hso.onclick=()=>openSearch(); if(hs)hs.onkeydown=e=>{if(e.key==="Enter")openSearch(hs.value)};
   const librarySearch=document.getElementById("librarySearch");if(librarySearch)librarySearch.oninput=()=>filterLibrary();
   const initialCat=qp().get("cat")||"All";document.querySelectorAll("[data-cat]").forEach(b=>{if(b.dataset.cat===initialCat){document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");} b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filterLibrary(b.dataset.cat);}}); if(document.getElementById("libraryGrid")&&initialCat!=="All")filterLibrary(initialCat);
-  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.querySelectorAll(".amount").forEach(a=>{a.querySelector("span:last-child").textContent=t.dataset.res;const old=a.querySelector(".resource-icon");old.outerHTML=resourceBadge(t.dataset.res);});});
+  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");const slug=qp().get("game")||"";document.querySelectorAll(".amount").forEach(a=>{a.querySelector("span:last-child").textContent=t.dataset.res;const old=a.querySelector(".resource-icon");old.outerHTML=resourceBadge(t.dataset.res,slug);});});
   document.querySelectorAll(".amount").forEach(a=>a.onclick=()=>{document.querySelectorAll(".amount").forEach(x=>x.classList.remove("selected"));a.classList.add("selected");});
   const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const id=document.getElementById("playerId"),player=id?.value.trim()||"";if(!/^[A-Za-z0-9._#-]{3,32}$/.test(player)){id?.classList.add("invalid");id?.focus();toast("Enter a valid Player ID (3–32 characters)");return;}id.classList.remove("invalid");const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";const loader=document.getElementById("profileLoader"),copy=document.getElementById("loaderText");loader.hidden=false;document.body.classList.add("loading-profile");cont.disabled=true;setTimeout(()=>{copy.textContent=loadingMessage(g)+"...";},850);setTimeout(()=>{copy.textContent="Options ready";},1750);setTimeout(()=>{document.body.classList.remove("loading-profile");setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt,player});},2400);};
   const locker=document.getElementById("lockerBtn");if(locker)locker.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;if(CONFIG.lockerUrl.includes("YOUR-ADBLUEMEDIA-LOCKER-URL")){toast("Set your AdBlueMedia locker URL in app.js → CONFIG.lockerUrl");return;}const u=new URL(CONFIG.lockerUrl,location.href);if(currentS1())u.searchParams.set("s1",currentS1());u.searchParams.set("s2",g.slug);location.href=u.toString();};
