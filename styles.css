@@ -110,12 +110,14 @@ body.loading-profile{overflow:hidden}@keyframes profile-spin{to{transform:rotate
   .game-identity{margin-top:115px;gap:11px}.game-page-logo{width:58px;height:58px;border-radius:15px}.game-page .game-identity h1{margin:3px 0 0;font-size:29px}.game-page .game-hero-art{right:0;top:0;width:100%;height:58%;opacity:.9}.game-page .game-hero:before{background:linear-gradient(180deg,rgba(5,17,31,.12),rgba(5,17,31,.68) 48%,rgba(5,17,31,.98) 72%)}.game-page .game-hero-content>p{margin-top:9px}
 }
 
-/* Render supplied banners as a true hero background */
-.game-page .game-hero{background-image:linear-gradient(90deg,rgba(5,17,31,.82),rgba(5,17,31,.2)),var(--game-banner);background-size:cover;background-position:center}
+/* Render supplied banners as a real image element, avoiding blocked external backgrounds. */
+.game-page .game-hero{background:#071525}
+.game-banner-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;z-index:0}
+.game-banner-image.is-fallback{object-fit:cover;filter:saturate(.9)}
 .game-page .game-hero:before{background:linear-gradient(90deg,rgba(4,13,25,.78) 0%,rgba(4,13,25,.34) 52%,rgba(4,13,25,.08) 100%)}
 .lock-badge{overflow:hidden;padding:0;background:none}.lock-badge .offer-game-logo{display:block;width:100%;height:100%;object-fit:cover}
 .game-facts{display:grid;gap:10px;margin-top:17px}.game-facts>div{display:grid;grid-template-columns:115px 1fr;gap:12px;align-items:start;padding:12px 13px;border:1px solid #dbe6ef;border-radius:13px;background:#f6faff}.game-facts span{color:#71869a;font-size:11px;font-weight:750}.game-facts strong{color:#203950;font-size:12px;line-height:1.45}.game-about-note{margin-top:16px;padding:13px;border-radius:13px;background:#eef5fa;color:#657c91;font-size:10px;line-height:1.55}
 @media(max-width:760px){
-  .game-page .game-hero{background-position:center top}.game-page .game-hero:before{background:linear-gradient(180deg,rgba(3,11,22,.05) 0%,rgba(3,11,22,.18) 43%,rgba(3,11,22,.92) 67%,rgba(3,11,22,.98) 100%)}.game-identity{margin-top:115px}
+  .game-banner-image{object-position:center top}.game-page .game-hero:before{background:linear-gradient(180deg,rgba(3,11,22,.03) 0%,rgba(3,11,22,.12) 43%,rgba(3,11,22,.88) 67%,rgba(3,11,22,.97) 100%)}.game-identity{margin-top:115px}
   .game-facts>div{grid-template-columns:95px 1fr}
 }
