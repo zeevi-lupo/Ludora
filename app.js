@@ -49,11 +49,11 @@ const GAME_IMAGES = {
 };
 
 const GAME_BANNERS = {
-  "monopoly-go":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/monopoly-go.jpg",
-  "travel-town":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/travel-town.png",
-  "gossip-harbor":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/gossip-harbor.jpeg",
-  "coin-master":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/coin-master.jpeg",
-  "match-masters":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/match-masters.jpg"
+  "monopoly-go":"./assets/banners/monopoly-go.jpg?v=20260916b",
+  "travel-town":"./assets/banners/travel-town.png?v=20260916b",
+  "gossip-harbor":"./assets/banners/gossip-harbor.jpeg?v=20260916b",
+  "coin-master":"./assets/banners/coin-master.jpeg?v=20260916b",
+  "match-masters":"./assets/banners/match-masters.jpg?v=20260916b"
 };
 
 const CONFIG = {
@@ -174,7 +174,7 @@ function amountsFor(g){
 function gamePage(g){
   const [c1,c2]=g.colors;const amounts=amountsFor(g);
   return `<div class="shell game-page" data-theme="${esc(g.slug)}" style="--accent:${c1};--accent2:${c2}">
-    <section class="game-hero" style="--game-banner:url('${bannerAsset(g.slug)}')"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><div class="game-identity">${gameImage(g,`${g.name} official logo`,"game-page-logo")}<div><span class="mini-label">GAME EXPERIENCE</span><h1>${esc(g.name)}</h1></div></div><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
+    <section class="game-hero"><img class="game-banner-image" src="${bannerAsset(g.slug)}" alt="${esc(g.name)} game banner" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='${asset(g.slug)}';this.classList.add('is-fallback')"><div class="game-hero-content"><button class="back-btn" data-route="games">← Back to games</button><div class="game-identity">${gameImage(g,`${g.name} official logo`,"game-page-logo")}<div><span class="mini-label">GAME EXPERIENCE</span><h1>${esc(g.name)}</h1></div></div><p>${esc(g.tagline)}</p><div class="meta"><span class="pill">${esc(g.category)}</span><span class="pill">${esc(g.resource)}</span>${g.secondary?`<span class="pill">${esc(g.secondary)}</span>`:""}</div></div></section>
     <div class="game-layout">
       <section class="option-card"><div class="step-row"><span class="step active"></span><span class="step"></span><span class="step"></span></div><h2>Choose your option</h2><p class="option-copy">Select a content option to personalize the next step. Ludora does not directly add in-game currency or items to third-party accounts.</p>
         <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary)}${esc(g.secondary)}</button>`:""}</div>
