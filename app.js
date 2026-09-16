@@ -49,11 +49,11 @@ const GAME_IMAGES = {
 };
 
 const GAME_BANNERS = {
-  "monopoly-go":"/assets/banners/monopoly-go.jpg?v=3",
-  "travel-town":"/assets/banners/travel-town.png?v=3",
-  "gossip-harbor":"/assets/banners/gossip-harbor.jpeg?v=3",
-  "coin-master":"/assets/banners/coin-master.jpeg?v=3",
-  "match-masters":"/assets/banners/match-masters.jpg?v=3"
+  "monopoly-go":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/monopoly-go.jpg",
+  "travel-town":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/travel-town.png",
+  "gossip-harbor":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/gossip-harbor.jpeg",
+  "coin-master":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/coin-master.jpeg",
+  "match-masters":"https://raw.githubusercontent.com/zeevi-lupo/Ludora/dce99ecce814d5c4442d23aace70f80feda69b19/assets/banners/match-masters.jpg"
 };
 
 const CONFIG = {
@@ -86,6 +86,10 @@ function resourceIcon(resource=""){
 }
 function resourceBadge(resource){const robux=resource.toLowerCase().includes("robux");return `<span class="resource-icon${robux?" resource-robux":""}" aria-hidden="true">${robux?"<i></i>":resourceIcon(resource)}</span>`;}
 function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
+function gameExperience(category){
+  const copy={Board:"Board-building and dice-based progression",Merge:"Merge items to progress through stories and locations",Casual:"Quick sessions with collection and progression",Puzzle:"Puzzle levels with strategic progression",Sports:"Team building and competitive sports gameplay",Creative:"Explore community-created worlds and experiences",Adventure:"Exploration, collection and character progression",Simulation:"Build, manage and expand your own world",Strategy:"Build, upgrade and compete through strategic decisions",Action:"Fast multiplayer action and competitive modes"};
+  return copy[category]||"Mobile progression and collection gameplay";
+}
 function setQuery(obj={}){
   const p=new URLSearchParams();
   const s1=currentS1();
@@ -179,10 +183,10 @@ function gamePage(g){
         <button class="cta-full" id="continueBtn">Continue →</button>
         <div class="notice">Selections on this page are used to personalize the experience. Partner offers have their own requirements, eligibility and availability.</div>
       </section>
-      <aside class="info-card"><div class="info-top"><div class="game-mini-icon"><img src="${asset(g.slug)}" alt=""></div><div><span class="mini-label">GAME EXPERIENCE</span><h3>${esc(g.name)}</h3></div></div>
-        <div class="theme-note"><strong>Unique visual direction</strong><span>${esc(g.vibe)}</span></div>
-        <div class="check-list"><div><b>✓</b><span>Responsive mobile layout</span></div><div><b>✓</b><span>Unique artwork for this game</span></div><div><b>✓</b><span>One consistent Ludora flow</span></div></div>
-        <div class="tracking-box">Tracking: <code>s1</code> keeps the member ID and <code>s2=${esc(g.slug)}</code> identifies this game.</div>
+      <aside class="info-card"><div class="info-top"><div class="game-mini-icon"><img src="${asset(g.slug)}" alt=""></div><div><span class="mini-label">ABOUT THE GAME</span><h3>${esc(g.name)}</h3></div></div>
+        <div class="theme-note"><strong>About ${esc(g.name)}</strong><span>${esc(g.tagline)}</span></div>
+        <div class="game-facts"><div><span>Genre</span><strong>${esc(g.category)}</strong></div><div><span>Main resource</span><strong>${resourceIcon(g.resource)} ${esc(g.resource)}</strong></div><div><span>Game experience</span><strong>${esc(gameExperience(g.category))}</strong></div></div>
+        <div class="game-about-note">Game names, logos and artwork belong to their respective owners. Ludora is an independent discovery experience.</div>
       </aside>
     </div>
     <div class="profile-loader" id="profileLoader" hidden role="status" aria-live="polite">
