@@ -74,12 +74,12 @@ const GAME_BANNERS = {
 };
 
 const RESOURCE_IMAGES = {
-  "monopoly-go":"./assets/resources/monopoly-go-dice.jpg?v=20260917a",
-  "gossip-harbor":"./assets/resources/gossip-harbor-energy.jpg?v=20260917a",
-  "travel-town":"./assets/resources/travel-town-energy.png?v=20260917a",
-  "tasty-travel":"./assets/resources/tasty-travel-energy.jpg?v=20260917a",
-  "coin-master":"./assets/resources/coin-master-spins.jpg?v=20260917a",
-  "match-masters":"./assets/resources/match-masters-coins.png?v=20260917a"
+  "monopoly-go":"./assets/resources-v2/monopoly-go-dice.png?v=20260917b",
+  "gossip-harbor":"./assets/resources-v2/gossip-harbor-energy.png?v=20260917b",
+  "travel-town":"./assets/resources-v2/travel-town-energy.png?v=20260917b",
+  "tasty-travel":"./assets/resources-v2/tasty-travel-energy.png?v=20260917b",
+  "coin-master":"./assets/resources-v2/coin-master-spins.png?v=20260917b",
+  "match-masters":"./assets/resources-v2/match-masters-coins.png?v=20260917b"
 };
 
 const CONFIG = {
@@ -124,9 +124,11 @@ function resourceSvg(resource=""){
   };
   return icons[kind]||icons.coin;
 }
-function resourceBadge(resource,slug=""){
+function resourceBadge(resource,slug="",tier=null){
   const image=RESOURCE_IMAGES[slug];
-  return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}" aria-hidden="true">${image?`<img src="${image}" alt="" loading="lazy" onerror="this.remove()">`:""}${resourceSvg(resource)}</span>`;
+  const count=tier===null?1:Math.max(1,Math.min(4,Number(tier)+1));
+  const pictures=image?Array.from({length:count},(_,i)=>`<img src="${image}" alt="" loading="lazy" style="--item:${i}" onerror="this.remove()">`).join(""):"";
+  return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}${tier!==null?` resource-stack resource-tier-${count}`:""}" style="--resource-count:${count}" aria-hidden="true">${pictures}${resourceSvg(resource)}</span>`;
 }
 function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
 function gameExperience(category){
@@ -221,7 +223,7 @@ function gamePage(g){
     <div class="game-layout">
       <section class="option-card"><div class="step-row"><span class="step active"></span><span class="step"></span><span class="step"></span></div><h2>Choose your option</h2><p class="option-copy">Select a content option to personalize the next step. Ludora does not directly add in-game currency or items to third-party accounts.</p>
         <div class="tabs"><button class="tab active" data-res="${esc(g.resource)}">${resourceBadge(g.resource,g.slug)}${esc(g.resource)}</button>${g.secondary?`<button class="tab" data-res="${esc(g.secondary)}">${resourceBadge(g.secondary,g.slug)}${esc(g.secondary)}</button>`:""}</div>
-        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}">${resourceBadge(g.resource,g.slug)}<strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
+        <div class="amount-grid">${amounts.map((a,i)=>`<button class="amount ${i===1?"selected":""}" data-amount="${a}">${resourceBadge(g.resource,g.slug,i)}<strong>${a}</strong><span>${esc(g.resource)}</span></button>`).join("")}</div>
         <label class="player-id-field" for="playerId"><span>Player ID / User ID</span><input id="playerId" type="text" inputmode="text" maxlength="32" autocomplete="off" placeholder="Enter your game ID" aria-describedby="playerIdHelp"><small id="playerIdHelp">Use your public in-game ID only. Never enter your password.</small></label>
         <button class="cta-full" id="continueBtn">Continue →</button>
         <div class="notice">Selections on this page are used to personalize the experience. Partner offers have their own requirements, eligibility and availability.</div>
@@ -289,7 +291,7 @@ function bind(){
   if(hsb)hsb.onclick=()=>openSearch(hs?.value||""); if(hso)hso.onclick=()=>openSearch(); if(hs)hs.onkeydown=e=>{if(e.key==="Enter")openSearch(hs.value)};
   const librarySearch=document.getElementById("librarySearch");if(librarySearch)librarySearch.oninput=()=>filterLibrary();
   const initialCat=qp().get("cat")||"All";document.querySelectorAll("[data-cat]").forEach(b=>{if(b.dataset.cat===initialCat){document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");} b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.remove("active"));b.classList.add("active");filterLibrary(b.dataset.cat);}}); if(document.getElementById("libraryGrid")&&initialCat!=="All")filterLibrary(initialCat);
-  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");const slug=qp().get("game")||"";document.querySelectorAll(".amount").forEach(a=>{a.querySelector("span:last-child").textContent=t.dataset.res;const old=a.querySelector(".resource-icon");old.outerHTML=resourceBadge(t.dataset.res,slug);});});
+  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");const slug=qp().get("game")||"";document.querySelectorAll(".amount").forEach((a,i)=>{a.querySelector("span:last-child").textContent=t.dataset.res;const old=a.querySelector(".resource-icon");old.outerHTML=resourceBadge(t.dataset.res,slug,i);});});
   document.querySelectorAll(".amount").forEach(a=>a.onclick=()=>{document.querySelectorAll(".amount").forEach(x=>x.classList.remove("selected"));a.classList.add("selected");});
   const cont=document.getElementById("continueBtn");if(cont)cont.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;const id=document.getElementById("playerId"),player=id?.value.trim()||"";if(!/^[A-Za-z0-9._#-]{3,32}$/.test(player)){id?.classList.add("invalid");id?.focus();toast("Enter a valid Player ID (3–32 characters)");return;}id.classList.remove("invalid");const res=document.querySelector(".tab.active")?.dataset.res||g.resource;const amt=document.querySelector(".amount.selected")?.dataset.amount||"";const loader=document.getElementById("profileLoader"),copy=document.getElementById("loaderText");loader.hidden=false;document.body.classList.add("loading-profile");cont.disabled=true;setTimeout(()=>{copy.textContent=loadingMessage(g)+"...";},850);setTimeout(()=>{copy.textContent="Options ready";},1750);setTimeout(()=>{document.body.classList.remove("loading-profile");setQuery({game:g.slug,s2:g.slug,step:"verify",resource:res,amount:amt,player});},2400);};
   const locker=document.getElementById("lockerBtn");if(locker)locker.onclick=()=>{const g=GAMES.find(x=>x.slug===qp().get("game"));if(!g)return;if(CONFIG.lockerUrl.includes("YOUR-ADBLUEMEDIA-LOCKER-URL")){toast("Set your AdBlueMedia locker URL in app.js → CONFIG.lockerUrl");return;}const u=new URL(CONFIG.lockerUrl,location.href);if(currentS1())u.searchParams.set("s1",currentS1());u.searchParams.set("s2",g.slug);location.href=u.toString();};
