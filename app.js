@@ -126,9 +126,18 @@ function resourceSvg(resource=""){
 }
 function resourceBadge(resource,slug="",tier=null){
   const image=RESOURCE_IMAGES[slug];
-  const count=tier===null?1:Math.max(1,Math.min(4,Number(tier)+1));
-  const pictures=image?Array.from({length:count},(_,i)=>`<img src="${image}" alt="" loading="lazy" style="--item:${i}" onerror="this.remove()">`).join(""):"";
-  return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}${tier!==null?` resource-stack resource-tier-${count}`:""}" style="--resource-count:${count}" aria-hidden="true">${pictures}${resourceSvg(resource)}</span>`;
+  const rows=tier===null?1:Math.max(1,Math.min(4,Number(tier)+1));
+  let pictures="";
+  if(image&&tier===null)pictures=`<img src="${image}" alt="" loading="lazy" onerror="this.remove()">`;
+  if(image&&tier!==null){
+    const items=[];
+    for(let row=0;row<rows;row++){
+      const inRow=row+1,spread=15,start=35-((inRow-1)*spread)/2-14;
+      for(let col=0;col<inRow;col++)items.push(`<img src="${image}" alt="" loading="lazy" style="--pile-x:${start+col*spread}px;--pile-y:${row*9}px;--pile-z:${10+row}" onerror="this.remove()">`);
+    }
+    pictures=items.join("");
+  }
+  return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}${tier!==null?` resource-stack resource-pile-${rows}`:""}" aria-hidden="true">${pictures}${resourceSvg(resource)}</span>`;
 }
 function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
 function gameExperience(category){
