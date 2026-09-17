@@ -73,6 +73,15 @@ const GAME_BANNERS = {
   "last-war-survival":"https://images.ctfassets.net/vfkpgemp7ek3/1hcC59AL0kW7LQqD0GZTcg/e09901b465e9df2434395c5f55afdc88/Cover_Image.jpg"
 };
 
+const RESOURCE_IMAGES = {
+  "monopoly-go":"./assets/resources/monopoly-go-dice.jpg?v=20260917a",
+  "gossip-harbor":"./assets/resources/gossip-harbor-energy.jpg?v=20260917a",
+  "travel-town":"./assets/resources/travel-town-energy.png?v=20260917a",
+  "tasty-travel":"./assets/resources/tasty-travel-energy.jpg?v=20260917a",
+  "coin-master":"./assets/resources/coin-master-spins.jpg?v=20260917a",
+  "match-masters":"./assets/resources/match-masters-coins.png?v=20260917a"
+};
+
 const CONFIG = {
   lockerUrl: "https://YOUR-ADBLUEMEDIA-LOCKER-URL.example/offer",
   siteName: "Ludora",
@@ -115,7 +124,10 @@ function resourceSvg(resource=""){
   };
   return icons[kind]||icons.coin;
 }
-function resourceBadge(resource,slug=""){return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}" aria-hidden="true">${resourceSvg(resource)}</span>`;}
+function resourceBadge(resource,slug=""){
+  const image=RESOURCE_IMAGES[slug];
+  return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}" aria-hidden="true">${image?`<img src="${image}" alt="" loading="lazy" onerror="this.remove()">`:""}${resourceSvg(resource)}</span>`;
+}
 function loadingMessage(g){return g.resource.toLowerCase().includes("energy")?"Preparing energy options":g.resource.toLowerCase().match(/dice|roll/)?"Preparing dice options":`Preparing ${g.resource} options`;}
 function gameExperience(category){
   const copy={Board:"Board-building and dice-based progression",Merge:"Merge items to progress through stories and locations",Casual:"Quick sessions with collection and progression",Puzzle:"Puzzle levels with strategic progression",Sports:"Team building and competitive sports gameplay",Creative:"Explore community-created worlds and experiences",Adventure:"Exploration, collection and character progression",Simulation:"Build, manage and expand your own world",Strategy:"Build, upgrade and compete through strategic decisions",Action:"Fast multiplayer action and competitive modes"};
