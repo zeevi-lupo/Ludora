@@ -146,17 +146,12 @@ function resourceBadge(resource,slug="",tier=null){
   let pictures="";
   if(image&&tier===null)pictures=`<img src="${image}" alt="" loading="lazy" onerror="this.remove()">`;
   if(image&&tier!==null){
-    const kind=resourceKind(resource);
-    const packageType=kind==="cash"?"case":kind==="energy"||kind==="spin"?"tank":kind==="dice"?"pile":"chest";
-    const packaged=Number(tier)>=2&&packageType!=="pile";
     const items=[];
-    const visibleRows=packaged?(Number(tier)===2?2:3):rows;
-    for(let row=0;row<visibleRows;row++){
+    for(let row=0;row<rows;row++){
       const inRow=row+1,spread=15,start=35-((inRow-1)*spread)/2-14;
-      for(let col=0;col<inRow;col++)items.push(`<img src="${image}" alt="" loading="lazy" style="--pile-x:${start+col*spread}px;--pile-y:${packaged?row*7:row*9}px;--pile-z:${10+row}" onerror="this.remove()">`);
+      for(let col=0;col<inRow;col++)items.push(`<img src="${image}" alt="" loading="lazy" style="--pile-x:${start+col*spread}px;--pile-y:${row*9}px;--pile-z:${10+row}" onerror="this.remove()">`);
     }
-    const pack=packaged?`<i class="resource-package package-${packageType} package-tier-${Number(tier)+1}"></i>`:"";
-    pictures=pack+items.join("");
+    pictures=items.join("");
   }
   return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}${tier!==null?` resource-stack resource-pile-${rows}`:""}" aria-hidden="true">${pictures}${resourceSvg(resource)}</span>`;
 }
