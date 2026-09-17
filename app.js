@@ -6,7 +6,7 @@ const GAMES = [
   {slug:"match-masters",name:"Match Masters",category:"Puzzle",resource:"Coins",secondary:null,tagline:"Competitive matching with bright boards, boosters, and quick battles.",colors:["#5b7cff","#ff4fd8"],badge:"Trending",vibe:"Competitive neon puzzle styling with electric blue and magenta."},
   {slug:"tasty-travel",name:"Tasty Travel",category:"Merge",resource:"Energy",secondary:null,tagline:"A colorful food-and-travel merge journey with a cheerful atmosphere.",colors:["#ff8a3d","#ffcc66"],badge:"New",vibe:"Warm food-and-travel palette with orange, cream and cheerful highlights."},
   {slug:"ea-fc-mobile",name:"EA SPORTS FC Mobile",category:"Sports",resource:"Gems",secondary:null,tagline:"Football squads, events, and competitive mobile play.",colors:["#16c784","#0b5cff"],badge:"Sports",vibe:"Stadium-inspired green and deep blue with sharper competitive styling."},
-  {slug:"sm27",name:"SM27",category:"Sports",resource:"Money",secondary:null,tagline:"A football-management style experience focused on squads, tactics, and progress.",colors:["#16a3ff","#42d392"],badge:"Manager",vibe:"Tactical dashboard feel with cool blues and management-focused details."},
+  {slug:"sm27",name:"SM27",category:"Sports",resource:"Gold",secondary:null,tagline:"A football-management style experience focused on squads, tactics, and progress.",colors:["#16a3ff","#42d392"],badge:"Manager",vibe:"Tactical dashboard feel with cool blues and management-focused details."},
   {slug:"roblox",name:"Roblox",category:"Creative",resource:"Robux",secondary:null,tagline:"Explore user-created worlds, social experiences, and imaginative play.",colors:["#1b2330","#00a6ff"],badge:"Creative",vibe:"Clean block-inspired dark styling with crisp blue accents."},
   {slug:"pokemon-go",name:"Pokémon GO",category:"Adventure",resource:"PokéCoins",secondary:null,tagline:"Outdoor exploration, collecting, raids, and location-based discovery.",colors:["#2c7be5","#7ad66d"],badge:"Explore",vibe:"Map and outdoor discovery styling with sky blue and green."},
   {slug:"royal-match",name:"Royal Match",category:"Puzzle",resource:"Coins",secondary:null,tagline:"Bright match-3 levels with castle-themed progression.",colors:["#1f8cff","#ffd257"],badge:"Puzzle",vibe:"Royal blue and gold with castle-inspired polish."},
@@ -79,7 +79,23 @@ const RESOURCE_IMAGES = {
   "travel-town":"./assets/resources-v2/travel-town-energy.png?v=20260917b",
   "tasty-travel":"./assets/resources-v2/tasty-travel-energy.png?v=20260917b",
   "coin-master":"./assets/resources-v2/coin-master-spins.png?v=20260917b",
-  "match-masters":"./assets/resources-v2/match-masters-coins.png?v=20260917b"
+  "match-masters":"./assets/resources-v2/match-masters-coins.png?v=20260917b",
+  "sm27":"./assets/resources-v3/sm27-gold.png?v=20260918a",
+  "last-war-survival":"./assets/resources-v3/last-war-survival-diamonds.png?v=20260918a",
+  "candy-crush-saga":"./assets/resources-v3/candy-crush-saga-gold-bars.png?v=20260918a",
+  "clash-of-clans":"./assets/resources-v3/clash-of-clans-gems.png?v=20260918a",
+  "brawl-stars":"./assets/resources-v3/brawl-stars-gems.png?v=20260918a",
+  "dice-dreams":"./assets/resources-v3/dice-dreams-rolls.png?v=20260918a",
+  "rise-of-kingdoms":"./assets/resources-v3/rise-of-kingdoms-gems.png?v=20260918a",
+  "whiteout-survival":"./assets/resources-v3/whiteout-survival-gems.png?v=20260918a",
+  "homescapes":"./assets/resources-v3/homescapes-coins.png?v=20260918a",
+  "gardenscapes":"./assets/resources-v3/homescapes-coins.png?v=20260918a",
+  "family-island":"./assets/resources-v3/family-island-energy.png?v=20260918a",
+  "township":"./assets/resources-v3/township-cash.png?v=20260918a",
+  "royal-match":"./assets/resources-v3/royal-match-coins.png?v=20260918a",
+  "pokemon-go":"./assets/resources-v3/pokemon-go-pokecoins.png?v=20260918a",
+  "roblox":"./assets/resources-v3/roblox-robux.png?v=20260918a",
+  "ea-fc-mobile":"./assets/resources-v3/ea-fc-mobile-gems.png?v=20260918a"
 };
 
 const CONFIG = {
@@ -104,7 +120,7 @@ function resourceKind(resource=""){
   if(r.includes("spin"))return "spin";
   if(r.includes("robux"))return "robux";
   if(r.includes("pokécoin"))return "pokecoin";
-  if(r.includes("gold bar"))return "goldbar";
+  if(r==="gold"||r.includes("gold bar"))return "goldbar";
   if(r.includes("cash")||r.includes("money"))return "cash";
   if(r.includes("gem")||r.includes("diamond"))return "gem";
   return "coin";
@@ -130,12 +146,17 @@ function resourceBadge(resource,slug="",tier=null){
   let pictures="";
   if(image&&tier===null)pictures=`<img src="${image}" alt="" loading="lazy" onerror="this.remove()">`;
   if(image&&tier!==null){
+    const kind=resourceKind(resource);
+    const packageType=kind==="cash"?"case":kind==="energy"||kind==="spin"?"tank":kind==="dice"?"pile":"chest";
+    const packaged=Number(tier)>=2&&packageType!=="pile";
     const items=[];
-    for(let row=0;row<rows;row++){
+    const visibleRows=packaged?(Number(tier)===2?2:3):rows;
+    for(let row=0;row<visibleRows;row++){
       const inRow=row+1,spread=15,start=35-((inRow-1)*spread)/2-14;
-      for(let col=0;col<inRow;col++)items.push(`<img src="${image}" alt="" loading="lazy" style="--pile-x:${start+col*spread}px;--pile-y:${row*9}px;--pile-z:${10+row}" onerror="this.remove()">`);
+      for(let col=0;col<inRow;col++)items.push(`<img src="${image}" alt="" loading="lazy" style="--pile-x:${start+col*spread}px;--pile-y:${packaged?row*7:row*9}px;--pile-z:${10+row}" onerror="this.remove()">`);
     }
-    pictures=items.join("");
+    const pack=packaged?`<i class="resource-package package-${packageType} package-tier-${Number(tier)+1}"></i>`:"";
+    pictures=pack+items.join("");
   }
   return `<span class="resource-icon resource-${resourceKind(resource)}${slug?` resource-game-${slug}`:""}${image?" resource-image":""}${tier!==null?` resource-stack resource-pile-${rows}`:""}" aria-hidden="true">${pictures}${resourceSvg(resource)}</span>`;
 }
